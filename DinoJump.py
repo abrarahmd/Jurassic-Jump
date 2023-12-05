@@ -5,7 +5,6 @@ from OpenGL.GLU import *
 dinosaur_jump = 0
 goingUP = False
 goingDOWN = False
-stable = True
 
 def dinosaur():
     glColor3f(0, 0, 0)
