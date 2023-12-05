@@ -1,13 +1,21 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+import time
 
 dinosaur_jump = 0
 goingUP = False
 goingDOWN = False
 
+movingCactus1 = 0
+cactus_1 = 2000
+cactus = 3000
+cactus1 = 5000
+
+speed = 1
+seconds = 0
 def dinosaur():
-    glColor3f(0, 0, 0)
+    glColor3f(0.4, 0.0, 0.5)
     #head
     midpoint(90, 200 + dinosaur_jump, 105, 200 + dinosaur_jump)
     midpoint(90, 200 + dinosaur_jump, 90, 195 + dinosaur_jump)
@@ -87,52 +95,126 @@ def dinosaur():
     midpoint(55, 55 + dinosaur_jump, 65, 55 + dinosaur_jump)
     midpoint(55, 60 + dinosaur_jump, 55, 55 + dinosaur_jump)
 
-def cactus():
-    glColor3f(0, 0, 0)
-
-    midpoint(500, 37, 525, 37)
-    midpoint(500, 80, 500, 37)
-    midpoint(500,200,500,95)
-    midpoint(525, 200, 525, 110)
-    midpoint(525,90,525,37)
-    midpoint(500,200,505,200)
-    midpoint(520,200,525,200)
-    midpoint(505,205,505,200)
-    midpoint(505,205,520,205)
-    midpoint(520,205,520,200)
-
-    midpoint(475,80,500,80)
-    midpoint(475,85,475,80)
-    midpoint(470,85,475,85)
-    midpoint(470,85,470,90)
-    midpoint(465,90,470,90)
-    midpoint(470,90,470,85)
-    midpoint(465,150, 465,90)
-    midpoint(465,150,470,150)
-    midpoint(470,155,470,150)
-    midpoint(470,155,475,155)
-    midpoint(475,155,475,150)
-    midpoint(475,150,480,150)
-    midpoint(480,150,480,95)
-    midpoint(480,95,500,95)
-
-    midpoint(525,90,560,90)
-    midpoint(525,110,554,110)
-    midpoint(560,97,560,90)
-    midpoint(560,97,567,97)
-    midpoint(567,104,567,97)
-    midpoint(567,104,574,104)
-    midpoint(574,165,574,104)
-    midpoint(567,165,574,165)
-    midpoint(567,170,567,165)
-    midpoint(561,170,567,170)
-    midpoint(561,170,561,165)
-    midpoint(554,165,561,165)
-    midpoint(554,165,554,110)
-
-
+def cacTus():
+    glColor3f(0.0, 0.2, 0.0)
+    #cactus1
+    midpoint(500 + cactus_1 - movingCactus1, 37, 525 + cactus_1 - movingCactus1, 37)
+    midpoint(500 + cactus_1 - movingCactus1, 80, 500 + cactus_1 - movingCactus1, 37)
+    midpoint(500 + cactus_1 - movingCactus1,200,500 + cactus_1 - movingCactus1,95)
+    midpoint(525 + cactus_1 - movingCactus1, 200, 525 + cactus_1 - movingCactus1, 110)
+    midpoint(525 + cactus_1 - movingCactus1,90,525 + cactus_1 - movingCactus1,37)
+    midpoint(500 + cactus_1 - movingCactus1,200,505 + cactus_1 - movingCactus1,200)
+    midpoint(520 + cactus_1 - movingCactus1,200,525 + cactus_1 - movingCactus1,200)
+    midpoint(505 + cactus_1 - movingCactus1,205,505 + cactus_1 - movingCactus1,200)
+    midpoint(505 + cactus_1 - movingCactus1,205,520 + cactus_1 - movingCactus1,205)
+    midpoint(520 + cactus_1 - movingCactus1,205,520 + cactus_1 - movingCactus1,200)
+    midpoint(475 + cactus_1 - movingCactus1,80,500 + cactus_1 - movingCactus1,80)
+    midpoint(475 + cactus_1 - movingCactus1,85,475 + cactus_1 - movingCactus1,80)
+    midpoint(470 + cactus_1 - movingCactus1,85,475 + cactus_1 - movingCactus1,85)
+    midpoint(470 + cactus_1 - movingCactus1,85,470 + cactus_1 - movingCactus1,90)
+    midpoint(465 + cactus_1 - movingCactus1,90,470 + cactus_1 - movingCactus1,90)
+    midpoint(470 + cactus_1 - movingCactus1,90,470 + cactus_1 - movingCactus1,85)
+    midpoint(465 + cactus_1 - movingCactus1,150, 465 + cactus_1 - movingCactus1,90)
+    midpoint(465 + cactus_1 - movingCactus1,150,470 + cactus_1 - movingCactus1,150)
+    midpoint(470 + cactus_1 - movingCactus1,155,470 + cactus_1 - movingCactus1,150)
+    midpoint(470 + cactus_1 - movingCactus1,155,475 + cactus_1 - movingCactus1,155)
+    midpoint(475 + cactus_1 - movingCactus1,155,475 + cactus_1 - movingCactus1,150)
+    midpoint(475 + cactus_1 - movingCactus1,150,480 + cactus_1 - movingCactus1,150)
+    midpoint(480 + cactus_1 - movingCactus1,150,480 + cactus_1 - movingCactus1,95)
+    midpoint(480 + cactus_1 - movingCactus1,95,500 + cactus_1 - movingCactus1,95)
+    midpoint(525 + cactus_1 - movingCactus1,90,560 + cactus_1 - movingCactus1,90)
+    midpoint(525 + cactus_1 - movingCactus1,110,554 + cactus_1 - movingCactus1,110)
+    midpoint(560 + cactus_1 - movingCactus1,97,560 + cactus_1 - movingCactus1,90)
+    midpoint(560 + cactus_1 - movingCactus1,97,567 + cactus_1 - movingCactus1,97)
+    midpoint(567 + cactus_1 - movingCactus1,104,567 + cactus_1 - movingCactus1,97)
+    midpoint(567 + cactus_1 - movingCactus1,104,574 + cactus_1 - movingCactus1,104)
+    midpoint(574 + cactus_1 - movingCactus1,165,574 + cactus_1 - movingCactus1,104)
+    midpoint(567 + cactus_1 - movingCactus1,165,574 + cactus_1 - movingCactus1,165)
+    midpoint(567 + cactus_1 - movingCactus1,170,567 + cactus_1 - movingCactus1,165)
+    midpoint(561 + cactus_1 - movingCactus1,170,567 + cactus_1 - movingCactus1,170)
+    midpoint(561 + cactus_1 - movingCactus1,170,561 + cactus_1 - movingCactus1,165)
+    midpoint(554 + cactus_1 - movingCactus1,165,561 + cactus_1 - movingCactus1,165)
+    midpoint(554 + cactus_1 - movingCactus1,165,554 + cactus_1 - movingCactus1,110)
+    #cactus2
+    midpoint(500 +cactus-movingCactus1, 37, 525 +cactus-movingCactus1, 37)
+    midpoint(500 +cactus-movingCactus1, 80, 500 +cactus-movingCactus1, 37)
+    midpoint(500 +cactus-movingCactus1,200,500 +cactus-movingCactus1,95)
+    midpoint(525 +cactus-movingCactus1, 200, 525 +cactus-movingCactus1, 110)
+    midpoint(525 +cactus-movingCactus1,90,525 +cactus-movingCactus1,37)
+    midpoint(500 +cactus-movingCactus1,200,505 +cactus-movingCactus1,200)
+    midpoint(520 +cactus-movingCactus1,200,525 +cactus-movingCactus1,200)
+    midpoint(505 +cactus-movingCactus1,205,505 +cactus-movingCactus1,200)
+    midpoint(505 +cactus-movingCactus1,205,520 +cactus-movingCactus1,205)
+    midpoint(520 +cactus-movingCactus1,205,520 +cactus-movingCactus1,200)
+    midpoint(475 +cactus-movingCactus1,80,500 +cactus-movingCactus1,80)
+    midpoint(475 +cactus-movingCactus1,85,475 +cactus-movingCactus1,80)
+    midpoint(470 +cactus-movingCactus1,85,475 +cactus-movingCactus1,85)
+    midpoint(470 +cactus-movingCactus1,85,470 +cactus-movingCactus1,90)
+    midpoint(465 +cactus-movingCactus1,90,470 +cactus-movingCactus1,90)
+    midpoint(470 +cactus-movingCactus1,90,470 +cactus-movingCactus1,85)
+    midpoint(465 +cactus-movingCactus1,150, 465 +cactus-movingCactus1,90)
+    midpoint(465 +cactus-movingCactus1,150,470 +cactus-movingCactus1,150)
+    midpoint(470 +cactus-movingCactus1,155,470 +cactus-movingCactus1,150)
+    midpoint(470 +cactus-movingCactus1,155,475 +cactus-movingCactus1,155)
+    midpoint(475 +cactus-movingCactus1,155,475 +cactus-movingCactus1,150)
+    midpoint(475 +cactus-movingCactus1,150,480 +cactus-movingCactus1,150)
+    midpoint(480 +cactus-movingCactus1,150,480 +cactus-movingCactus1,95)
+    midpoint(480 +cactus-movingCactus1,95,500 +cactus-movingCactus1,95)
+    midpoint(525 +cactus-movingCactus1,90,560 +cactus-movingCactus1,90)
+    midpoint(525 +cactus-movingCactus1,110,554 +cactus-movingCactus1,110)
+    midpoint(560 +cactus-movingCactus1,97,560 +cactus-movingCactus1,90)
+    midpoint(560 +cactus-movingCactus1,97,567 +cactus-movingCactus1,97)
+    midpoint(567 +cactus-movingCactus1,104,567 +cactus-movingCactus1,97)
+    midpoint(567 +cactus-movingCactus1,104,574 +cactus-movingCactus1,104)
+    midpoint(574 +cactus-movingCactus1,165,574 +cactus-movingCactus1,104)
+    midpoint(567 +cactus-movingCactus1,165,574 +cactus-movingCactus1,165)
+    midpoint(567 +cactus-movingCactus1,170,567 +cactus-movingCactus1,165)
+    midpoint(561 +cactus-movingCactus1,170,567 +cactus-movingCactus1,170)
+    midpoint(561 +cactus-movingCactus1,170,561 +cactus-movingCactus1,165)
+    midpoint(554 +cactus-movingCactus1,165,561 +cactus-movingCactus1,165)
+    midpoint(554 +cactus-movingCactus1,165,554 +cactus-movingCactus1,110)
+    #cactus_3
+    midpoint(500 +cactus1 - movingCactus1, 37, 525 +cactus1 - movingCactus1, 37)
+    midpoint(500 +cactus1 - movingCactus1, 80, 500 +cactus1 - movingCactus1, 37)
+    midpoint(500 +cactus1 - movingCactus1,200,500 +cactus1 - movingCactus1,95)
+    midpoint(525 +cactus1 - movingCactus1, 200, 525 +cactus1 - movingCactus1, 110)
+    midpoint(525 +cactus1 - movingCactus1,90,525 +cactus1 - movingCactus1,37)
+    midpoint(500 +cactus1 - movingCactus1,200,505 +cactus1 - movingCactus1,200)
+    midpoint(520 +cactus1 - movingCactus1,200,525 +cactus1 - movingCactus1,200)
+    midpoint(505 +cactus1 - movingCactus1,205,505 +cactus1 - movingCactus1,200)
+    midpoint(505 +cactus1 - movingCactus1,205,520 +cactus1 - movingCactus1,205)
+    midpoint(520 +cactus1 - movingCactus1,205,520 +cactus1 - movingCactus1,200)
+    midpoint(475 +cactus1 - movingCactus1,80,500 +cactus1 - movingCactus1,80)
+    midpoint(475 +cactus1 - movingCactus1,85,475 +cactus1 - movingCactus1,80)
+    midpoint(470 +cactus1 - movingCactus1,85,475 +cactus1 - movingCactus1,85)
+    midpoint(470 +cactus1 - movingCactus1,85,470 +cactus1 - movingCactus1,90)
+    midpoint(465 +cactus1 - movingCactus1,90,470 +cactus1 - movingCactus1,90)
+    midpoint(470 +cactus1 - movingCactus1,90,470 +cactus1 - movingCactus1,85)
+    midpoint(465 +cactus1 - movingCactus1,150, 465 +cactus1 - movingCactus1,90)
+    midpoint(465 +cactus1 - movingCactus1,150,470 +cactus1 - movingCactus1,150)
+    midpoint(470 +cactus1 - movingCactus1,155,470 +cactus1 - movingCactus1,150)
+    midpoint(470 +cactus1 - movingCactus1,155,475 +cactus1 - movingCactus1,155)
+    midpoint(475 +cactus1 - movingCactus1,155,475 +cactus1 - movingCactus1,150)
+    midpoint(475 +cactus1 - movingCactus1,150,480 +cactus1 - movingCactus1,150)
+    midpoint(480 +cactus1 - movingCactus1,150,480 +cactus1 - movingCactus1,95)
+    midpoint(480 +cactus1 - movingCactus1,95,500 +cactus1 - movingCactus1,95)
+    midpoint(525 +cactus1 - movingCactus1,90,560 +cactus1 - movingCactus1,90)
+    midpoint(525 +cactus1 - movingCactus1,110,554 +cactus1 - movingCactus1,110)
+    midpoint(560 +cactus1 - movingCactus1,97,560 +cactus1 - movingCactus1,90)
+    midpoint(560 +cactus1 - movingCactus1,97,567 +cactus1 - movingCactus1,97)
+    midpoint(567 +cactus1 - movingCactus1,104,567 +cactus1 - movingCactus1,97)
+    midpoint(567 +cactus1 - movingCactus1,104,574 +cactus1 - movingCactus1,104)
+    midpoint(574 +cactus1 - movingCactus1,165,574 +cactus1 - movingCactus1,104)
+    midpoint(567 +cactus1 - movingCactus1,165,574 +cactus1 - movingCactus1,165)
+    midpoint(567 +cactus1 - movingCactus1,170,567 +cactus1 - movingCactus1,165)
+    midpoint(561 +cactus1 - movingCactus1,170,567 +cactus1 - movingCactus1,170)
+    midpoint(561 +cactus1 - movingCactus1,170,561 +cactus1 - movingCactus1,165)
+    midpoint(554 +cactus1 - movingCactus1,165,561 +cactus1 - movingCactus1,165)
+    midpoint(554 +cactus1 - movingCactus1,165,554 +cactus1 - movingCactus1,110)
+    
+    
 def bird():
-    glColor3f(0, 0, 0)
+    glColor3f(0.5, 0.5, 0.0)
     midpoint(179, 176, 185, 179)
     midpoint(185, 179, 197, 184)
     midpoint(197, 184, 201, 173)
@@ -161,8 +243,8 @@ def bird():
     midpoint(197, 186, 179, 176)
 
 def land():
+    glColor3f(0.2, 0.1, 0.0)
     midpoint(0, 35, 10000, 35)
-
 
 def keyboardListener(key, x, y):
     global dinosaur_jump, goingUP, goingDOWN
@@ -172,7 +254,7 @@ def keyboardListener(key, x, y):
     glutPostRedisplay()
 
 def draw_points(x0, y0):
-    glPointSize(2)
+    glPointSize(3)
     glBegin(GL_POINTS)
     glVertex2f(x0,y0)
     glEnd()
@@ -268,7 +350,7 @@ def mouseListener(button, state, x, y):
             pass
 
 def animate():
-    global dinosaur_jump, goingUP, goingDOWN
+    global dinosaur_jump, goingUP, goingDOWN, movingCactus1, seconds
     glutPostRedisplay()
     if goingUP == True and goingDOWN == False:
         dinosaur_jump += 15
@@ -281,13 +363,17 @@ def animate():
             goingDOWN = False
             goingUP = False
             dinosaur_jump = 0
-
-
+    if (574 +cactus1 - movingCactus1) < 0:
+        movingCactus1 = 0
+    else:
+        movingCactus1 += 15
+    seconds += 1
+  
 def iterate():
     glViewport(0, 0, 800, 500)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(0.0, 800, 0.0, 500, 0.0, 1.0)
+    glOrtho(0.0, 1000, 0.0, 700, 0.0, 1.0)
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
 
@@ -301,7 +387,7 @@ def showScreen():
     animate()
     dinosaur()
     land()
-    cactus()
+    cacTus()
     bird()
 
     glutSwapBuffers()
