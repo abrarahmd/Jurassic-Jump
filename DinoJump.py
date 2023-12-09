@@ -2,21 +2,18 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
+start_time = 0
+listfortimeprint = []
 gameOver = False
-
 dinosaur_jump = 0
 goingUP = False
 goingDOWN = False
-
 movingCactus1 = 0
 cactus_1 = 2000
 cactus = 3000
 cactus1 = 5000
-
-
 speed = 1
 seconds = 0
-
 bird_x = 1500
 bird_y = 4500
 bird_speed = 15
@@ -249,7 +246,6 @@ def bird():
     midpoint(204 + bird_x, 191, 207 + bird_x, 195)
     midpoint(207 + bird_x, 195, 200 + bird_x, 193)
     midpoint(197 + bird_x, 186, 179 + bird_x, 176)
-
     #Bird2
     midpoint(179 + bird_y, 176, 185 + bird_y, 179)
     midpoint(185 + bird_y, 179, 197 + bird_y, 184)
@@ -282,12 +278,16 @@ def land():
     glColor3f(0.2, 0.1, 0.0)
     midpoint(0, 35, 10000, 35)
 
-def keyboardListener(key, x, y):
-    global dinosaur_jump, goingUP, goingDOWN
-    if key==b' ':
-        if goingDOWN != True:
-            goingUP = True
-    glutPostRedisplay()
+def cross():
+    glColor3f(1.0, 0.0, 0.0)
+    midpoint(920, 680, 970, 650)
+    midpoint(920, 650, 970, 680)
+
+def arrowLeft():
+    glColor3f(0.0, 1.0, 1.0)
+    midpoint(20, 660, 70, 660)
+    midpoint(20, 660, 40, 680)
+    midpoint(20, 660, 40, 640)
 
 def draw_points(x0, y0):
     glPointSize(3)
@@ -374,21 +374,35 @@ def convert0_Original(zone, x0, y0):
     if zone == 7:
         return x0, -y0
    
-def specialKeyListener(key, left, right):
-    glutPostRedisplay()
-    pass
-    glutPostRedisplay()
-
 def mouseListener(button, state, x, y):
-    global ballx, bally, create_new, pauseBoolean, gameOver, score
+    global dinosaur_jump, start_time, movingCactus1, cactus_1, cactus, cactus1, speed, seconds, bird_x, bird_y
     if button==GLUT_LEFT_BUTTON:
         if(state == GLUT_DOWN):
-            pass
+            if 736 <= x <= 774 and 15 <= y <= 40:
+                glutLeaveMainLoop()
+            if 15 <= x <= 60 and 10 <= y <= 40:
+                print("Restarted!")
+                start_time = 0
+                dinosaur_jump = 0
+                movingCactus1 = 0
+                cactus_1 = 2000
+                cactus = 3000
+                cactus1 = 5000
+                speed = 1
+                seconds = 0
+                bird_x = 1500
+                bird_y = 4500
 
-def animate():
-    global dinosaur_jump, goingUP, goingDOWN, movingCactus1, seconds, bird_x, bird_y, gameOver
+def keyboardListener(key, x, y):
+    global dinosaur_jump, goingUP, goingDOWN
+    if key==b' ':
+        if goingDOWN != True:
+            goingUP = True
     glutPostRedisplay()
-    
+                
+def animate():
+    global dinosaur_jump, goingUP, goingDOWN, movingCactus1, seconds, bird_x, bird_y, gameOver, start_time, listfortimeprint
+    glutPostRedisplay()
     if gameOver == False:
         if goingUP == True and goingDOWN == False:
             dinosaur_jump += 30
@@ -408,38 +422,40 @@ def animate():
             bird_y = 4000
         else:
             movingCactus1 += 15
-
         #birdMove
         bird_x -= bird_speed
         bird_y -= bird_speed
-            
         #clashwithCactus1
         if (35+dinosaur_jump) < 155 and 130 >= (465 + cactus_1 - movingCactus1) and 15 <= (500 + cactus_1 - movingCactus1):
             gameOver = True
         elif (35+dinosaur_jump) < 200 and 130 >= (500 + cactus_1 - movingCactus1) and 15 <= (525 + cactus_1 - movingCactus1):
             gameOver = True
-
         #clashwithCactus2
         elif (35+dinosaur_jump) < 155 and 130 >= (465 +cactus-movingCactus1) and 15 <= (500 +cactus-movingCactus1):
             gameOver = True
         elif (35+dinosaur_jump) < 200 and 130 >= (500 +cactus-movingCactus1) and 15 <= (525 +cactus-movingCactus1):
             gameOver = True
-        
         #clashwithCactus3
         elif (35+dinosaur_jump) < 155 and 130 >= (465 +cactus1 - movingCactus1) and 15 <= (500 +cactus1 - movingCactus1):
             gameOver = True
         elif (35+dinosaur_jump) < 200 and 130 >= (500 +cactus1 - movingCactus1) and 15 <= (525 +cactus1 - movingCactus1):
             gameOver = True
-        
         #clashwithBird1
         elif (35+dinosaur_jump) < 207 and 130 >= (179 + bird_x) and 55 <= (256 + bird_x):
             gameOver = True
         #clashwithBird2
         elif (35+dinosaur_jump) < 207 and 130 >= (179 + bird_y) and 55 <= (256 + bird_y):
             gameOver = True
-
         else: 
             pass
+        start_time += 0.04
+        if int(start_time) not in listfortimeprint:
+            listfortimeprint.append(int(start_time))
+            print(f"Score: {int(start_time)}")
+            if len(listfortimeprint) > 3:
+                listfortimeprint.pop(0)  
+        if gameOver:
+            print("Game Over")
 
 def iterate():
     glViewport(0, 0, 800, 500)
@@ -456,11 +472,12 @@ def showScreen():
     glLoadIdentity()
     iterate()
     animate()
+    cross()
+    arrowLeft()
     dinosaur()
     land()
     cacTus()
     bird()
-
     glutSwapBuffers()
     glutPostRedisplay()
 
@@ -472,4 +489,5 @@ wind = glutCreateWindow(b"Jurassic Jump") #window name
 glutDisplayFunc(showScreen)
 glutIdleFunc(showScreen)
 glutKeyboardFunc(keyboardListener)
+glutMouseFunc(mouseListener)
 glutMainLoop()
