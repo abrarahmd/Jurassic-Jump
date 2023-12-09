@@ -1,7 +1,8 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import time
+
+gameOver = False
 
 dinosaur_jump = 0
 goingUP = False
@@ -11,6 +12,7 @@ movingCactus1 = 0
 cactus_1 = 2000
 cactus = 3000
 cactus1 = 5000
+
 
 speed = 1
 seconds = 0
@@ -211,8 +213,7 @@ def cacTus():
     midpoint(561 +cactus1 - movingCactus1,170,561 +cactus1 - movingCactus1,165)
     midpoint(554 +cactus1 - movingCactus1,165,561 +cactus1 - movingCactus1,165)
     midpoint(554 +cactus1 - movingCactus1,165,554 +cactus1 - movingCactus1,110)
-    
-    
+       
 def bird():
     glColor3f(0.5, 0.5, 0.0)
     midpoint(179, 176, 185, 179)
@@ -350,24 +351,48 @@ def mouseListener(button, state, x, y):
             pass
 
 def animate():
-    global dinosaur_jump, goingUP, goingDOWN, movingCactus1, seconds
+    global dinosaur_jump, goingUP, goingDOWN, movingCactus1, seconds, gameOver
     glutPostRedisplay()
-    if goingUP == True and goingDOWN == False:
-        dinosaur_jump += 15
-        if dinosaur_jump >= 250:
-            goingUP = False
-            goingDOWN = True
-    if goingDOWN == True and goingUP == False: 
-        dinosaur_jump -= 15
-        if dinosaur_jump < 0:
-            goingDOWN = False
-            goingUP = False
-            dinosaur_jump = 0
-    if (574 +cactus1 - movingCactus1) < 0:
-        movingCactus1 = 0
-    else:
-        movingCactus1 += 15
-    seconds += 1
+    
+    if gameOver == False:
+        if goingUP == True and goingDOWN == False:
+            dinosaur_jump += 25
+            if dinosaur_jump >= 300:
+                goingUP = False
+                goingDOWN = True
+        if goingDOWN == True and goingUP == False: 
+            dinosaur_jump -= 25
+            if dinosaur_jump < 0:
+                goingDOWN = False
+                goingUP = False
+                dinosaur_jump = 0
+        if (574 +cactus1 - movingCactus1) < 0:
+            movingCactus1 = 0
+        else:
+            movingCactus1 += 25
+        seconds += 1
+
+        #clashwithCactus1
+        if (35+dinosaur_jump) < 155 and 130 >= (465 + cactus_1 - movingCactus1) and 15 <= (500 + cactus_1 - movingCactus1):
+            gameOver = True
+        elif (35+dinosaur_jump) < 200 and 130 >= (500 + cactus_1 - movingCactus1) and 15 <= (525 + cactus_1 - movingCactus1):
+            gameOver = True
+
+        #clashwithCactus2
+        elif (35+dinosaur_jump) < 155 and 130 >= (465 +cactus-movingCactus1) and 15 <= (500 +cactus-movingCactus1):
+            gameOver = True
+        elif (35+dinosaur_jump) < 200 and 130 >= (500 +cactus-movingCactus1) and 15 <= (525 +cactus-movingCactus1):
+            gameOver = True
+        
+        #clashwithCactus3
+        elif (35+dinosaur_jump) < 155 and 130 >= (465 +cactus1 - movingCactus1) and 15 <= (500 +cactus1 - movingCactus1):
+            gameOver = True
+        elif (35+dinosaur_jump) < 200 and 130 >= (500 +cactus1 - movingCactus1) and 15 <= (525 +cactus1 - movingCactus1):
+            gameOver = True
+
+        else: 
+            pass
+
   
 def iterate():
     glViewport(0, 0, 800, 500)
@@ -383,7 +408,6 @@ def showScreen():
     glClear(GL_COLOR_BUFFER_BIT)
     glLoadIdentity()
     iterate()
-
     animate()
     dinosaur()
     land()
