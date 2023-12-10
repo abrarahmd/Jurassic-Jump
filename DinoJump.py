@@ -40,10 +40,7 @@ def dinosaur():
     midpoint(125, 160 + dinosaur_jump, 125, 155 + dinosaur_jump)
     midpoint(105, 155 + dinosaur_jump, 125, 155 + dinosaur_jump)
     #eye
-    midpoint(95, 185 + dinosaur_jump, 102, 185 + dinosaur_jump)
-    midpoint(102, 185 + dinosaur_jump, 102, 178 + dinosaur_jump)
-    midpoint(95, 178 + dinosaur_jump, 102, 178 + dinosaur_jump)
-    midpoint(95, 185 + dinosaur_jump, 95, 178 + dinosaur_jump)
+    midpointCircle(2, 98, 181 + dinosaur_jump) #Midpoint Circle Algorithm Part
     #body
     midpoint(105, 155 + dinosaur_jump, 105, 115 + dinosaur_jump)
     midpoint(105, 115 + dinosaur_jump, 110, 115 + dinosaur_jump)
@@ -373,6 +370,37 @@ def convert0_Original(zone, x0, y0):
         return y0, -x0
     if zone == 7:
         return x0, -y0
+
+def circlePoints(x, y, x0, y0):
+    draw_points_circle(x + x0, y + y0)
+    draw_points_circle(y + x0, x + y0)
+    draw_points_circle(y + x0, -x + y0)
+    draw_points_circle(x + x0, -y + y0)
+    draw_points_circle(-x + x0, -y + y0)
+    draw_points_circle(-y + x0, -x + y0)
+    draw_points_circle(-y + x0, x + y0)
+    draw_points_circle(-x + x0, y + y0)
+
+def midpointCircle(radius, x0, y0):
+    d = 1 - radius 
+    x = 0
+    y = radius
+    circlePoints(x, y, x0, y0)
+    while x < y:
+        if d < 0:
+            d = d + 2*x + 3
+            x += 1
+        else:
+            d = d + 2*x -2*y + 5
+            x += 1
+            y = y - 1
+        circlePoints(x, y, x0, y0)
+ 
+def draw_points_circle(x, y):
+    glPointSize(3)
+    glBegin(GL_POINTS)
+    glVertex2f(x, y)
+    glEnd()
    
 def mouseListener(button, state, x, y):
     global dinosaur_jump, start_time, movingCactus1, cactus_1, cactus, cactus1, speed, seconds, bird_x, bird_y, gameOver, goingUP, goingDOWN
@@ -490,7 +518,7 @@ glutInit()
 glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB)
 glutInitWindowSize(800, 500)
 glutInitWindowPosition(0, 0)
-wind = glutCreateWindow(b"Jurassic Jump") #window name
+wind = glutCreateWindow(b"Jurassic Jump")
 glutDisplayFunc(showScreen)
 glutIdleFunc(showScreen)
 glutKeyboardFunc(keyboardListener)
