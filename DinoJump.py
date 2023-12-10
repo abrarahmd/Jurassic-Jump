@@ -375,7 +375,7 @@ def convert0_Original(zone, x0, y0):
         return x0, -y0
    
 def mouseListener(button, state, x, y):
-    global dinosaur_jump, start_time, movingCactus1, cactus_1, cactus, cactus1, speed, seconds, bird_x, bird_y
+    global dinosaur_jump, start_time, movingCactus1, cactus_1, cactus, cactus1, speed, seconds, bird_x, bird_y, gameOver, goingUP, goingDOWN
     if button==GLUT_LEFT_BUTTON:
         if(state == GLUT_DOWN):
             if 736 <= x <= 774 and 15 <= y <= 40:
@@ -392,6 +392,11 @@ def mouseListener(button, state, x, y):
                 seconds = 0
                 bird_x = 1500
                 bird_y = 4500
+                gameOver = False
+                goingUP = False
+                goingDOWN = False
+
+                
 
 def keyboardListener(key, x, y):
     global dinosaur_jump, goingUP, goingDOWN
@@ -455,7 +460,7 @@ def animate():
             if len(listfortimeprint) > 3:
                 listfortimeprint.pop(0)  
         if gameOver:
-            print("Game Over")
+            print("Game Over!")
 
 def iterate():
     glViewport(0, 0, 800, 500)
