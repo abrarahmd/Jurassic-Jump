@@ -2,7 +2,7 @@
 
 ![Dinosaur Jump Game](https://github.com/abrarahmd/Jurassic-Jump/blob/main/gameplay.png)
 
-##This is a simple dinosaur jump game implemented using OpenGL library. The game is inspired by the offline Google Dino Jump game.
+## This is a simple dinosaur jump game implemented using OpenGL library. The game is inspired by the offline Google Dino Jump game.
 
 ---
 
