@@ -30,4 +30,4 @@ This is a simple dinosaur jump game implemented using OpenGL library. The game i
 
 ## Credits
 
-This game was created by [Your Name].
+This game was created by Abrar Ahmed, Zarin Tasnim Raisa & Mezbha Ul Haq Fahim.
