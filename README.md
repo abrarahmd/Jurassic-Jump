@@ -2,6 +2,8 @@
 
 This is a simple dinosaur jump game implemented using OpenGL library. The game is inspired by the offline Google Dino Jump game.
 
+![Dinosaur Jump Game](https://github.com/abrarahmd/Jurassic-Jump/blob/main/gameplay.png)
+
 ## Features
 
 1. Navigate a dinosaur character across a desert landscape, controlling it with jumping using the spacebar on your keyboard.
