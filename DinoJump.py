@@ -424,8 +424,6 @@ def mouseListener(button, state, x, y):
                 goingUP = False
                 goingDOWN = False
 
-                
-
 def keyboardListener(key, x, y):
     global dinosaur_jump, goingUP, goingDOWN
     if key==b' ':
