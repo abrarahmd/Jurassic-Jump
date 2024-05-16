@@ -1,4 +1,6 @@
-# Dinosaur Jump Game
+<div align="center">
+  <h1>Jurassic Jump</h1>
+</div>
 
 ![Dinosaur Jump Game](https://github.com/abrarahmd/Jurassic-Jump/blob/main/gameplay.png)
 
